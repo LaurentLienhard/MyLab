@@ -7,4 +7,4 @@ sudo apt-get update
 sudo apt-get upgrade -y
 curl -s https://ohmyposh.dev/install.sh | bash -s
 oh-my-posh font install CascadiaCode
-eval "$(oh-my-posh init bash)"
+eval "$(oh-my-posh --init --shell bash --config ~/.kali.omp.json)"
