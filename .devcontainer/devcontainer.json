@@ -20,7 +20,8 @@
 		},
 		"ghcr.io/devcontainers-contrib/features/terraform-asdf:2": {
 			"version": "1.8.0"
-		}
+		},
+		"ghcr.io/devcontainers-contrib/features/curl-apt-get:1": {}
 	},
 	"customizations": {
 		"vscode": {
@@ -33,7 +34,7 @@
 				"ms-vscode.powershell"
 			]
 		}
-	}
+	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
@@ -42,7 +43,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "uname -a",
+	"postCreateCommand": "./.devcontainer/install.sh"
 
 	// Configure tool-specific properties.
 	// "customizations": {},
