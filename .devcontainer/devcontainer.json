@@ -1,16 +1,26 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
-	"name": "Ubuntu",
+	"name": "MyLabContainer",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "mcr.microsoft.com/devcontainers/base:jammy",
 	"features": {
-		"ghcr.io/devcontainers/features/git:1": {},
-		"ghcr.io/devcontainers-contrib/features/powershell:1": {},
-		"ghcr.io/devcontainers-contrib/features/ansible:2": {},
+		"ghcr.io/devcontainers/features/git:1": {
+			"version": "2.44.0"
+		},
+		"ghcr.io/devcontainers-contrib/features/powershell:1": {
+			"version": "7.4.2"
+		},
+		"ghcr.io/devcontainers-contrib/features/ansible:2": {
+			"version": "2.16.5"
+		},
 		"ghcr.io/hspaans/devcontainer-features/ansible-lint:1": {},
-		"ghcr.io/devcontainers-contrib/features/packer-asdf:2": {},
-		"ghcr.io/devcontainers-contrib/features/terraform-asdf:2": {}
+		"ghcr.io/devcontainers-contrib/features/packer-asdf:2": {
+			"version": "1.10.2"
+		},
+		"ghcr.io/devcontainers-contrib/features/terraform-asdf:2": {
+			"version": "1.8.0"
+		}
 	},
 	"customizations": {
 		"vscode": {
