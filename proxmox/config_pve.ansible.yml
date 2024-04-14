@@ -1,0 +1,13 @@
+---
+# Description
+- name: pve auto configuration
+  hosts: pve
+  gather_facts: true
+  vars_files: 
+    - ./vars/pve.yml  
+  tasks:
+    - name: Install the latest version of wireless-tools
+      ansible.builtin.package:
+        name:
+          - wireless-tools
+        state: latest
