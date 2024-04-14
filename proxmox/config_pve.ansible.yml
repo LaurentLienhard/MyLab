@@ -11,3 +11,14 @@
         name:
           - wireless-tools
         state: latest
+    - name: Install the latest version of python3-proxmoxer
+      ansible.builtin.package:
+        name:
+          - python3-proxmoxer
+        state: latest
+    - name: Copy interface file
+      ansible.builtin.copy:
+        src: ./files/interfaces
+        dest: /etc/network/interfaces
+    - name : restart network service
+      shell: systemctl restart networking
