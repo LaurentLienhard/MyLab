@@ -1,0 +1,10 @@
+---
+# Description
+- name: Connectivty test
+  hosts: all
+  gather_facts: true
+  vars_files: 
+    - ./vars/pve.yml  
+  tasks:
+    - name: Test
+      ansible.builtin.ping:

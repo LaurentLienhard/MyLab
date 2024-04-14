@@ -31,7 +31,8 @@
 				"HashiCorp.terraform",
 				"4ops.packer",
 				"bbenoist.vagrant",
-				"ms-vscode.powershell"
+				"ms-vscode.powershell",
+				"srobert0560.sr-ansible-snippets"
 			]
 		}
 	},
