@@ -32,7 +32,8 @@
 				"4ops.packer",
 				"bbenoist.vagrant",
 				"ms-vscode.powershell",
-				"srobert0560.sr-ansible-snippets"
+				"srobert0560.sr-ansible-snippets",
+				"4ops.packer","szTheory.vscode-packer-powertools"
 			]
 		}
 	},
