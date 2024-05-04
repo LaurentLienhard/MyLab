@@ -1,10 +1,10 @@
 ---
 # Description
-- name: pve auto configuration
+- name: Pve auto configuration
   hosts: pve
   gather_facts: true
   vars_files: 
-    - ./vars/pve.yml  
+    - ../vars/pve.yml  
   tasks:
     - name: Delete enterprise repository
       ansible.builtin.file:
@@ -26,11 +26,11 @@
         line: "deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription"
         state: present
 
-    - name: Update and upgrade apt packages
-      become: yes
-      ansible.builtin.apt:
-        update_cache: yes
-        cache_valid_time: 86400 #One day
+#    - name: Update and upgrade apt packages
+#      become: yes
+#      ansible.builtin.apt:
+#        update_cache: no
+#        cache_valid_time: 86400 #One day
 
     - name: Install the latest version of wireless-tools
       ansible.builtin.package:
@@ -50,7 +50,7 @@
 
     - name: Copy interface file
       ansible.builtin.copy:
-        src: ./files/interfaces
+        src: ../files/interfaces
         dest: /etc/network/interfaces
 
     - name: restart network service
@@ -74,3 +74,45 @@
             server {{ nas_ip }}
             content backup
             prune-backups keep-all=1
+
+    - name: delete role
+      # Comment
+      become: yes
+      ansible.builtin.shell:
+        cmd: pveum role delete AnsibleProv
+
+    - name: delete user
+      # Comment
+      become: yes
+      ansible.builtin.shell:
+        cmd: pveum user delete ansible-prov@pve
+
+    - name: Create role
+      # Comment
+      become: yes
+      ansible.builtin.shell:
+        cmd: pveum role add AnsibleProv -privs "Datastore.Allocate Datastore.AllocateSpace Datastore.Audit Pool.Allocate Sys.Audit Sys.Console Sys.Modify VM.Allocate VM.Audit VM.Clone VM.Config.CDROM VM.Config.Cloudinit VM.Config.CPU VM.Config.Disk VM.Config.HWType VM.Config.Memory VM.Config.Network VM.Config.Options VM.Console VM.Migrate VM.Monitor VM.PowerMgmt SDN.Use"
+
+    - name: Create user
+      # Comment
+      become: yes
+      ansible.builtin.shell:
+        cmd: pveum user add ansible-prov@pve --password @ns1bl3 --comment "Ansible Provisioning"
+
+    - name: Assign group to user
+      # Comment
+      become: yes
+      ansible.builtin.shell:
+        cmd: pveum aclmod / -user ansible-prov@pve -role AnsibleProv
+
+    - name: Create token
+      # Comment
+      become: yes
+      ansible.builtin.shell:
+        cmd: pveum user token add ansible-prov@pve ansible -expire 0 -privsep 0 -comment "ansible token"
+      register: token
+    
+    - name: Show token      # Comment
+      ansible.builtin.debug:
+        msg: "{{ token }}"
+    

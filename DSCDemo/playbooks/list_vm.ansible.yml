@@ -1,0 +1,23 @@
+---
+- hosts: pvenodes
+  become: true
+  gather_facts: false
+  vars_files:
+    - ../vars/main.yml
+  tasks:
+    - name: debug
+      debug:
+        msg: "node {{ node }} / user {{ api_user }} api {{ api_host }} / token id {{ api_token_id }} / token secret {{ api_token_secret }}"
+
+    - name: List VMs on Host {{ node }} with user "{{ api_user }}"  
+      community.general.proxmox_vm_info:
+        api_host: "{{ api_host }}"
+        api_user: "{{ api_user }}"
+        api_token_id: "{{ api_token_id  | default(omit)}}"
+        api_token_secret: "{{ api_token_secret | default(omit)}}"
+        node: "{{ node }}"
+      register: vmlist
+
+    - name: Show Vms list
+      debug:
+        msg: "{{ vmlist }}"
