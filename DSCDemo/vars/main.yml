@@ -1,7 +1,0 @@
----
-# vars file for DSCDemo
-api_host: 192.168.1.201
-api_token_id: dsc-token
-api_token_secret: 93eeea72-36da-43a1-a84e-dee6b1a9e85a
-api_user: ansible@pam
-node: pve1
