@@ -62,6 +62,10 @@
     
     - name: Updating Proxmox VE (Patience)
     # This will update the Proxmox VE server
-      ansible.builtin.shell: |
-          apt-get update
-          apt-get -y dist-upgrade
+      ansible.builtin.apt:
+        update_cache: yes
+        upgrade: dist
+        autoremove: yes
+        autoclean: yes
+        force_apt_get: yes
+        cache_valid_time: 3600
