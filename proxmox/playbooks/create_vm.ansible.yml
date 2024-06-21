@@ -1,0 +1,17 @@
+---
+- name: Test proxmox vault
+  hosts: pve
+  tasks:
+    - name: Get info
+      community.general.proxmox_user_info:
+        api_host: "{{ proxmox_api_host }}"
+        node: "{{ proxmox_api_node }}"
+        api_user: "{{ proxmox_api_user }}"
+        api_token_id: "{{ proxmox_api_token_id }}"
+        api_token_secret: "{{ proxmox_api_token_secret }}"
+      register: infos
+
+    - name: Display infos
+      # Comment
+      ansible.builtin.debug:
+        var: infos
